@@ -1,0 +1,51 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.container {
+    margin: 50px auto;
+    width: 350px;
+    overflow: inherit;
+}
+
+.container ol {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    width: 350px;
+    float: left;
+    margin: 0 2px;
+}
+
+.container ol:ntyh-child(2) {
+    float: right;
+}
+
+.container ol li {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.container ol li a {
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    font-weight: normal;
+    display: block;
+    border: 1px solid #CCC;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.container ol li a:hover {
+    background: #f8f8f8;
+    color: #111;
+    text-decoration: none;
+}
