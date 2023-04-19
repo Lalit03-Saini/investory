@@ -1,5 +1,5 @@
 import axios from "axios";
-import { React, useState } from "react";
+import { React, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiError } from "react-icons/bi"
 import Popup from 'reactjs-popup';
@@ -28,7 +28,7 @@ const Welcome_page = () => {
         try {
             const url = "http://localhost:8000/api/user/edit-user";
             const { data: res } = await axios.put(url, data);
-            localStorage.setItem("generateToken", res.data);
+            localStorage.setItem("token", res.data);
             navigate("/Wellcome_page");
             res.status(200).send({ message: "You are update Your Profie" })
         }
@@ -85,7 +85,7 @@ const Welcome_page = () => {
                         </div>
                     </div>
                     <div className="btn-group username">
-                        <Popup trigger={<button className="button" type="button">Jane Client</button>} position="bottom center">
+                        <Popup trigger={<button className="button" type="button">john</button>} position="bottom center">
                             <Link to="#" data-bs-toggle="modal" data-bs-target="#editprofile" style={{ textDecoration: "none", textAlign: "center", color: "gold", display: "block", padding: "5px" }}>Edit Profile</Link>
                             <Link to="#" data-bs-toggle="modal" data-bs-target="#logout" style={{ textDecoration: "none", textAlign: "center", color: "gold", display: "block", padding: "5px" }}>Log Out</Link>
                             <div className=""></div>

@@ -16,6 +16,7 @@ const ForgetpaswordPage = () => {
             const url = "http://localhost:8000/api/user/forgot-password-token";
             const { data: res } = await axios.post(url, data);
             navigate("/Login");
+            window.alert("Please Check Your Indox for link if You not get so Check your span box")
             res.status(200).send({ message: "Check You Email Inbox" })
         }
         catch (error) {
@@ -34,7 +35,7 @@ const ForgetpaswordPage = () => {
                 <div className="container-fluid zerocol homepage">
                     <div className="row">
                         <div className="col-md-6">
-                            <div className="logo"><a href="#"><img src="images/logo.png" alt="" /></a></div>
+                            <div className="logo"><Link to="#"><img src="images/logo.png" alt="" /></Link></div>
                             <div className="home_form">
                                 <div className="forgot_password">
                                     <h1>FORGOT PASSWORD</h1>
@@ -48,7 +49,7 @@ const ForgetpaswordPage = () => {
                                             <div className="form-group submit" onClick={handleSubmit}>
                                                 <button style={{ background: "#FFDA94", display: "inline-block", borderRadius: "0px", textAlign: "center", cursor: "pointer", fontSize: "14px", lineHeight: "34px", color: "1A1A1A", padding: "0", border: "0", fontWeight: "700", height: "36px", width: "100%" }} >Send Link</button>
                                             </div>
-                                            <div className="interlink double"><Link to="#" className="signup2">Sign Up</Link> | <Link to="#" className="login">Login</Link></div>
+                                            <div className="interlink double"><Link to="/Signup" className="signup2">Sign Up</Link> | <Link to="/login" className="login">Login</Link></div>
                                             {error && <div className="error-tab"><BiError /> {error}</div>}
                                         </form>
                                     </div>

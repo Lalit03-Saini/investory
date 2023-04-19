@@ -6,14 +6,25 @@ import '../App.css';
 
 const Add_property = () => {
 
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState(
+        {
+            address: "",
+            sqft: "",
+            price: "",
+            layout: "",
+            stories: "",
+            year_build: "",
+            property_tax: "",
+            tax_assessment: "",
+            school_grades: "",
+            lot_size: "",
+            project_rental: ""
+        }
+    );
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/Wellcome_page");
-    };
+
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
@@ -22,9 +33,11 @@ const Add_property = () => {
         e.preventDefault();
         try {
             const url = "http://localhost:8000/api/product/create";
+            const token = 
             const { data: res } = await axios.post(url, data);
             localStorage.setItem("token", res.data);
             navigate("/Add_property");
+            window.alert("Your Property has added Successfully")
             res.status(204).send({ message: "You are successfully Login" })
         }
         catch (error) {
@@ -37,7 +50,10 @@ const Add_property = () => {
             }
         }
     }
-
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/Wellcome_page");
+    };
 
     return (
         <>
@@ -173,69 +189,85 @@ const Add_property = () => {
                                                 <label>MLS ID</label>
                                                 <input type="text" className="form-control" placeholder="MLS ID" />
                                             </div>
-                                            <Link to="#" data-bs-toggle="modal" data-bs-target="#editprofile"className="nomls">I don’t have MLS ID</Link>
+                                            <Link to="#" data-bs-toggle="modal" data-bs-target="#editproperty" className="nomls">I don’t have MLS ID</Link>
                                         </div>
                                     </div>
-                                    <div className="mlsblock2">
-                                        <div className="form-group">
-                                            <label>ADDRESS*</label>
-                                            <input type="text" className="form-control" placeholder="ADDRESS" required />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>SQFT*</label>
-                                            <input type="text" className="form-control" placeholder="SQFT" required />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>LAYOUT</label>
-                                            <input type="text" className="form-control" placeholder="LAYOUT" required />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>STORIES</label>
-                                            <input type="text" className="form-control" placeholder="STORIES" required />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>YEAR BUILT</label>
-                                            <input type="text" className="form-control" placeholder="YEAR BUILT" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>PROPERTY TAX</label>
-                                            <input type="text" className="form-control" placeholder="PROPERTY TAX" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>TAX ASSESSMENT</label>
-                                            <input type="text" className="form-control" placeholder="TAX ASSESSMENT" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>TAX ASSESSMENT</label>
-                                            <input type="text" className="form-control" placeholder="TAX ASSESSMENT" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>SCHOOL GRADES <img src="images/tooltip_icon.svg" alt="" /></label>
-                                            <span><input type="text" className="form-control" placeholder=" " /></span>
-                                            <span><input type="text" className="form-control" placeholder=" " /></span>
-                                            <span><input type="text" className="form-control" placeholder=" " /></span>
-                                        </div>
-                                        <div className="form-group">
-                                            <label>LOT SIZE</label>
-                                            <input type="text" className="form-control" placeholder="LOT SIZE" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>ASKING PRICE</label>
-                                            <input type="text" className="form-control" placeholder="ASKING PRICE" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>PROJECTED RENTAL</label>
-                                            <input type="text" className="form-control" placeholder="PROJECTED RENTAL" />
-                                        </div>
-                                    </div>
+                                    <div className="mlsblock2"></div>
                                     <div className="form-group submit">
-                                        <input type="submit" defaultValue="Add Property" /> <Link to="#" style={{border: "1px solid #C8B38A",background: "rgba(200, 179, 138, 0)",color: "#C8B38A",textAlign: "center",height:"36px"}}>Cancel</Link>
+                                        <input type="submit" defaultValue="Add Property" /> <Link to="#" style={{ border: "1px solid #C8B38A", background: "rgba(200, 179, 138, 0)", color: "#C8B38A", textAlign: "center", height: "36px" }}>Cancel</Link>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <button type="button" className="collapse_bar">Collapse</button>
+                </div>
+            </div>
+            {/* Modal */}
+            <div className="modal fade editprofile" id="editproperty" tabIndex={-1} aria-labelledby="editpropertyLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            <p>Add Property</p>
+                            <div className="contact_form">
+                                <form className="needs-validation" onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label>ADDRESS*</label>
+                                        <input type="text" name="address" className="form-control" onChange={handleChange} value={data.address} placeholder="ADDRESS" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>SQFT*</label>
+                                        <input type="text" name="sqft" className="form-control" onChange={handleChange} value={data.sqft} placeholder="SQFT" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>LAYOUT</label>
+                                        <input type="text" className="form-control" name="layout" onChange={handleChange} value={data.layout} placeholder="LAYOUT" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>STORIES</label>
+                                        <input type="text" className="form-control" name="stories" onChange={handleChange} value={data.stories} placeholder="STORIES" required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>YEAR BUILT</label>
+                                        <input type="text" className="form-control" name="year_build" onChange={handleChange} value={data.year_build} placeholder="YEAR BUILT" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>PROPERTY TAX</label>
+                                        <input type="text" className="form-control" name="property_tax" onChange={handleChange} value={data.property_tax} placeholder="PROPERTY TAX" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>TAX ASSESSMENT</label>
+                                        <input type="text" className="form-control" name="tax_assessment" onChange={handleChange} value={data.tax_assessment} placeholder="TAX ASSESSMENT" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>TAX ASSESSMENT</label>
+                                        <input type="text" className="form-control" name="tax_assessment" onChange={handleChange} value={data.tax_assessment} placeholder="TAX ASSESSMENT" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>SCHOOL GRADES <img src="images/tooltip_icon.svg" alt="" /></label>
+                                        <span><input type="text" className="form-control" name="school_grades" onChange={handleChange} value={data.school_grades} placeholder="00/00/00" /></span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>LOT SIZE</label>
+                                        <input type="text" name="lot_size" onChange={handleChange} value={data.lot_size} className="form-control" placeholder="LOT SIZE" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>ASKING PRICE</label>
+                                        <input type="text" className="form-control" name="price" onChange={handleChange} value={data.price} placeholder="ASKING PRICE" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>PROJECTED RENTAL</label>
+                                        <input type="text" className="form-control" name="project_rental" onChange={handleChange} value={data.project_rental} placeholder="PROJECTED RENTAL" />
+                                    </div>
+                                    {error && <div className="error-tab"><BiError /> {error}</div>}
+                                    <div className="form-group submit">
+                                        <button type="submit" style={{ margin: "8px", width: "97px", border: "1px solid #C8B38A", background: "rgba(200, 179, 138, 0)", color: "#C8B38A", textAlign: "center", height: "36px" }}>Submit</button>
+                                        <Link to="#" style={{ border: "1px solid #C8B38A", background: "rgba(200, 179, 138, 0)", color: "#C8B38A", textAlign: "center", height: "36px" }} data-bs-dismiss="modal" aria-label="Close">Cancel</Link>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {/* Modal */}
@@ -260,7 +292,7 @@ const Add_property = () => {
                                     </div>
                                     <div className="form-group">
                                         <label>TIMEZONE</label>
-                                        <select className="wide select" style={{marginTop:"23px"}} placeholder="EST" required>
+                                        <select className="wide select" style={{ marginTop: "23px" }} placeholder="EST" required>
                                             <option>GMT +6</option>
                                             <option>GMT +6</option>
                                             <option>GMT +6</option>
@@ -283,7 +315,7 @@ const Add_property = () => {
                                         <input type="tel" className="form-control" placeholder="WHATSAPP NUMBER (OPTIONAL)" />
                                     </div>
                                     <div className="form-group checkbox">
-                                        <label><input type="checkbox" /><span style={{marginTop:"15px"}} /> Same as phone number</label>
+                                        <label><input type="checkbox" /><span style={{ marginTop: "15px" }} /> Same as phone number</label>
                                     </div>
                                     <div className="form-group submit">
                                         <Link to="#" data-bs-dismiss="modal" aria-label="Close">Cancel</Link> <input type="submit" defaultValue="Save" />

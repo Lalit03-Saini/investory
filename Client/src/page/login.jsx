@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState} from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { BiError } from "react-icons/bi";
 
 
 const Login = () => {
+
     const [data, setData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();

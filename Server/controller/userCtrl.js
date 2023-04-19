@@ -245,18 +245,6 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
     });
 });
 
-// const updatePassword = asyncHandler(async (req, res) => {
-//     const {email} = req.params;
-//     const { password } = req.body;
-//     const user = await User.findOne(email);
-//     if (password) {
-//         user.password = password;
-//         const updatedPassword = await user.save();
-//         res.json(updatedPassword);
-//     } else {
-//         res.json(user);
-//     }
-// });
 
 //Update User Password 
 const updatePassword = asyncHandler(async (req, res) => {
